@@ -210,6 +210,13 @@ class Recall:
         self.config.storage.driver.knowledge_graph.delete_by_entity(entity_id)
         self.config.storage.driver.entity_fact.delete_by_entity(entity_id)
 
+
+    def delete_fact(self, fact_id: int) -> None:
+        if self.config.storage is None or self.config.storage.driver is None:
+            logger.debug("Fact deletion aborted - storage not configured")
+            return
+
+        self.config.storage.driver.entity_fact.delete(fact_id)
     def _embed_query(self, query: str) -> list[float]:
         logger.debug("Generating query embedding")
         embeddings_config = self.config.embeddings
