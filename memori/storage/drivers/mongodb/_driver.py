@@ -378,6 +378,9 @@ class EntityFact(BaseEntityFact):
         self.conn.execute("memori_entity_fact", "delete_many", {"entity_id": entity_id})
         return self
 
+    def delete(self, fact_id: int):
+        self.conn.execute("memori_entity_fact", "delete_one", {"_id": fact_id})
+
 
 class KnowledgeGraph(BaseKnowledgeGraph):
     def create(self, entity_id: int, semantic_triples: list):
