@@ -411,6 +411,16 @@ class EntityFact(BaseEntityFact):
         self.conn.commit()
         return self
 
+    def delete(self, fact_id: int):
+        self.conn.execute(
+            """
+            DELETE FROM memori_entity_fact
+             WHERE id = :1
+            """,
+            (fact_id,),
+        )
+        self.conn.commit()
+
 
 class KnowledgeGraph(BaseKnowledgeGraph):
     def create(self, entity_id: int, semantic_triples: list):
