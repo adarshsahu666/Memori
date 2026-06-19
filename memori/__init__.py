@@ -263,6 +263,16 @@ class Memori:
 
         Recall(self.config).delete_entity_memories(entity_id)
 
+
+    def delete_memory(self, memory_id: int) -> None:
+        """Delete a specific memory record by its identifier."""
+        if not self.config.byodb:
+            raise RuntimeError("delete_memory is only available in BYODB mode")
+
+        if not isinstance(memory_id, int):
+            raise TypeError("memory_id must be an integer")
+
+        Recall(self.config).delete_fact(memory_id)
     def agent_recall(
         self,
         *,
