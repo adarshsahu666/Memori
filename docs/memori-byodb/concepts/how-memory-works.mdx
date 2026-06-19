@@ -111,6 +111,26 @@ mem.config.recall_relevance_threshold = 0.05  # Lower = more results
 mem.config.recall_embeddings_limit = 500      # Reduce for lower memory usage
 ```
 
+## Memory Management
+
+You can delete individual memories or clear all memories for an entity using the SDK.
+
+### Deleting a Specific Memory
+
+If you have a memory ID (retrieved via `mem.recall()`), you can delete it directly:
+
+```python
+mem.delete_memory(123)
+```
+
+### Clearing All Memories for an Entity
+
+To wipe all memories for an entity while keeping conversation history intact:
+
+```python
+mem.delete_entity_memories("user_alice")
+```
+
 ## Memory Lifecycle
 
 !["Memori Lifecycle"](https://images.memorilabs.ai/docs/memori-lifecycle.webp)
