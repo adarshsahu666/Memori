@@ -365,6 +365,20 @@ def test_delete_entity_memories_supported_in_explicit_conn_mode(mocker):
     assert delete_memories.call_args[0][1] == "entity-id"
 
 
+
+def test_delete_memory_supported_in_byodb_mode(mocker):
+    delete_fact = mocker.patch(
+        "memori.memory.recall.Recall.delete_fact",
+    )
+    mem = Memori(conn=lambda: None)
+    mem.delete_memory(123)
+    delete_fact.assert_called_once_with(123)
+
+def test_delete_memory_rejected_in_cloud_mode():
+    mem = Memori(api_key="sk-test")
+    with pytest.raises(RuntimeError) as e:
+        mem.delete_memory(123)
+    assert str(e.value) == "delete_memory is only available in BYODB mode"
 def test_delete_entity_memories_rejected_in_cloud_mode(monkeypatch):
     monkeypatch.delenv("MEMORI_COCKROACHDB_CONNECTION_STRING", raising=False)
     monkeypatch.setenv("MEMORI_API_KEY", "test-api-key")
