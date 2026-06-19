@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added `delete_memory(memory_id)` to the main `Memori` class and `delete_fact(fact_id)` to the `Recall` class, allowing users to remove individual memory records in BYODB mode. This is supported across all drivers (SQLite, PostgreSQL, MySQL, Oracle, and MongoDB). (Fixes #303)
+
 - Added input validation for the `query` argument of `Memori.recall(...)`: a
   non-string `query` now raises `TypeError` and an empty or whitespace-only
   `query` raises `ValueError`, matching the existing `limit` validation and
