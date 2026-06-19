@@ -611,6 +611,16 @@ class EntityFact(BaseEntityFact):
         self.conn.commit()
         return self
 
+    def delete(self, fact_id: int):
+        self.conn.execute(
+            """
+            DELETE FROM memori_entity_fact
+             WHERE id = %s
+            """,
+            (fact_id,),
+        )
+        self.conn.commit()
+
 
 class Process(BaseProcess):
     def create(self, external_id: str):
